@@ -2,9 +2,13 @@
 
 # this pack is valid for apps with a hello.txt in the root
 echo 'detect script running'
-if [ -f $1/indentifier.txt ]; then
+echo $1
+
+
+if [ -f $1/identifier.txt ]; then
   echo 'VerifierBuildPack'
   exit 0
 else
+  echo 'exiting'
   exit 1
 fi
