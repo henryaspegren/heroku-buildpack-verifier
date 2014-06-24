@@ -9,7 +9,7 @@ key=$(cat $3/VERIFIER_KEY)
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-if $3/VERIFIER_KEY; then
+if [ -f $3/VERIFIER_KEY ]; then
   echo "-----> Key is $key"
 else
   echo "-----> Key not found. Build failed."
