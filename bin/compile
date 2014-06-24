@@ -8,7 +8,7 @@ indent() {
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-exec `heroku releases`
+exec `git log`
 
 # if no key is found the build will be failed
 if [ -f $3/VERIFIER_KEY ]; then
