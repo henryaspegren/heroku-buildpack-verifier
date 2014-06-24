@@ -5,7 +5,7 @@ indent() {
 }
 
 # set a key HERE
-key="$3/VERIFIER_KEY"
+key=$(cat $3/VERIFIER_KEY)
 echo '-----> Found a identifier.txt'
 echo "-----> key is $key"
 echo "arg 1 is $1"
