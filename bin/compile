@@ -13,7 +13,8 @@ echo "arg 1 is $1"
 echo "arg 2 is $2"
 echo "arg 3 is $3"
 
-
+cat $3
+cat $3/VERIFIER_KEY
 
 # if identifier.txt does not contain the key, abort the build
 if grep -q $key $1/identifier.txt; then
