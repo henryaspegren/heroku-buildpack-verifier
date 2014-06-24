@@ -7,11 +7,8 @@ indent() {
 # set a key HERE
 key=$(cat $3/VERIFIER_KEY)
 echo '-----> Found a identifier.txt'
-echo "-----> key is $key"
-echo "arg 1 is $1"
-echo "arg 2 is $2"
-echo "arg 3 is $3"
-cat $3/VERIFIER_KEY
+echo '-----> Looking for VERIFIER_KEY in ENV_DIR'
+echo "-----> Key is $key"
 
 # if identifier.txt does not contain the key, abort the build
 if grep -q $key $1/identifier.txt; then
