@@ -9,6 +9,7 @@ key='production_release'
 
 echo '-----> Found a identifier.txt'
 echo "-----> key is $key"
+echo "arg 1 is $1"
 
 
 # if identifier.txt does not contain the key, abort the build

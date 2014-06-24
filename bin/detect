@@ -1,10 +1,6 @@
 #!/bin/sh
 
-# this pack is valid for apps with a hello.txt in the root
-echo 'detect script running'
-echo $1
-
-
+# this pack is valid for apps with a identifier.txt in the root
 if [ -f $1/identifier.txt ]; then
   echo 'VerifierBuildPack'
   exit 0
