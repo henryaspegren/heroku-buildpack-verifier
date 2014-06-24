@@ -5,7 +5,7 @@ indent() {
 }
 
 # set a key HERE
-key=$(cat $3/VERIFIER_KEY)
+key=$(cat $3/VERIFIER_KEYSE)
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENV_DIR'
 echo "-----> Key is $key"
