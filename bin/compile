@@ -5,10 +5,15 @@ indent() {
 }
 
 # set a key HERE
-key=$(cat $3/VERIFIER_KEYSE)
+key=$(cat $3/VERIFIER_KEY)
 echo '-----> Found a identifier.txt'
-echo '-----> Looking for VERIFIER_KEY in ENV_DIR'
-echo "-----> Key is $key"
+echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
+
+if $3/VERIFIER_KEY; then
+  echo "-----> Key is $key"
+else
+  echo "-----> Key not found. Build failed."
+fi
 
 # if identifier.txt does not contain the key, abort the build
 if grep -q $key $1/identifier.txt; then
