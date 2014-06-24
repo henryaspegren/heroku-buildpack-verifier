@@ -4,15 +4,17 @@ indent() {
   sed -u 's/^/       /'
 }
 
-# set a key HERE
-key=$(cat $3/VERIFIER_KEY)
+# set a key by adding the VERIFIER_KEY to the ENVIR_DIR
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-if [ -f $3/VERIFIER_KEY ]; then
+# if no key is found the build will be failed
+if [ -f $3/VERIFIER_KEYS ]; then
+  key=$(cat $3/VERIFIER_KEY)
   echo "-----> Key is $key"
 else
   echo "-----> Key not found. Build failed."
+  exit 1
 fi
 
 # if identifier.txt does not contain the key, abort the build
