@@ -1,0 +1,22 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Found a identifier.txt"
+
+# set a key
+key='production quality'
+
+# search for the key
+contains_key=( grep $key $1/indeitifer.txt )
+
+# if identifier.txt is empty, abort the build
+if [ ! $contains_key]; then
+  echo "identifier.txt does not have the key. Build Failed" | indent
+  exit 1
+fi
+
+# replace identifier with goodbye in a new file
+cat $1/identifier.txt | sed -e "s/[Hh]ello/Goodbye/g" > $1/goodbye.txt
