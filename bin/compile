@@ -8,14 +8,22 @@ indent() {
 echo '-----> Looking for VERIFIER_KEY and VERIFIER_COMMAND in ENVIR_DIR'
 
 # if no VERIFIER_KEY is found the build will be failed
-if [ -f $3/VERIFIER_KEY && -f $3/VERIFIER_COMMAND ]; then
+if [ ( -f $3/VERIFIER_KEY ) ]; then
   key=$(cat $3/VERIFIER_KEY)
-  cmnd=$(cat $3/VERIFIER_COMMAND)
-  echo "-----> Set key to $key set command to $cmnd"
+  echo "-----> Set key to $key"
 else
-  echo "-----> Environment variables not found. Build failed."
+  echo "-----> No VERIFIER_KEY found. Build failed."
   exit 1
 fi
+
+if [ ( -f $3/VERIFIER_COMMAND ) ]; then
+  cmnd=$(cat $3/VERIFIER_COMMAND)
+  echo "-----> Set command to $cmnd"
+else
+  echo "-----> No VERIFIER_COMMAND found. Build failed."
+  exit 1
+fi
+
 
 echo "-----> Searching SHORTLOG for key to authorize deployment"
 
