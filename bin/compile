@@ -9,7 +9,7 @@ echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
 exec `cd $1`
-exec `cd appfiles`
+exec `cd first_django_project`
 exec `cd app`
 exec `cat identifier.txt`
 
