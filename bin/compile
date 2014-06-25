@@ -9,7 +9,6 @@ echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
 exec `cd $1`
-exec `ls`
 exec `cd appfiles`
 exec `cd app`
 exec `cat identifier.txt`
