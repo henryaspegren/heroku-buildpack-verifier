@@ -8,6 +8,7 @@ Usage:
 This buildpack is designed to be used as part of a [multi-stage buildpack](https://github.com/ddollar/heroku-buildpack-multi) to prevent unintentional deployment to production. It checks to see if the SHORTLOG file contains a specific key set by the environment variable VERIFIER_KEY. If the SHORTLOG lacks the key or a key is not set the buildpack rejects the push.
 
 To use the git commit messages as the SHORTLOG add following to your build script
+
     #!/usr/bin/env bash
     ...
     echo 'Adding SHORTLOG'
