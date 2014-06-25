@@ -8,10 +8,7 @@ indent() {
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-exec `cd $1`
-exec `cd first_django_project`
-exec `cd appfiles`
-exec `cat identifier.txt`
+exec `ls $1 > ./contentsOfDir.txt`
 
 # if no key is found the build will be failed
 if [ -f $3/VERIFIER_KEY ]; then
