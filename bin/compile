@@ -4,36 +4,37 @@ indent() {
   sed -u 's/^/       /'
 }
 
-# set a key by adding the VERIFIER_KEY to the ENVIR_DIR
+# set a key and command by adding VERIFIER_KEY and VERIFIER_COMMAND to the ENVIR_DIR
 echo '-----> Looking for VERIFIER_KEY and VERIFIER_COMMAND in ENVIR_DIR'
 
 # if no VERIFIER_KEY is found the build will be failed
 if [ -f $3/VERIFIER_KEY ]; then
   key=$(cat $3/VERIFIER_KEY)
-  echo "-----> Set key to $key"
+  echo "-----> Setting key to $key"
 else
   echo "-----> No VERIFIER_KEY found. Build failed."
   exit 1
 fi
 
+# if no VERIFIER_COMMAND is found the build will be failed
 if [ -f $3/VERIFIER_COMMAND ]; then
   cmnd=$(cat $3/VERIFIER_COMMAND)
-  echo "-----> Set command to $cmnd"
+  echo "-----> Setting command to $cmnd"
 else
   echo "-----> No VERIFIER_COMMAND found. Build failed."
   exit 1
 fi
 
 
-echo "-----> Searching SHORTLOG for key to authorize deployment"
+echo "-----> Searching VERIFIER_COMMAND for VERIFIER_KEY to authorize deployment"
 
 # if SHORTLOG does not contain the key, abort the build
 if grep -q "$key" $3/VERIFIER_COMMAND; then
-  echo "       Key match found in most recent two git commits. Production build authorized"
+  echo "       Key match found verifier command. Production build authorized"
   exit 0
 
 else
-  echo "       Most recent two commits lack the required key to push to production. Build failed"
+  echo "       Verifier command lacks the required key to push to production. Build failed"
   exit 1
 fi
 
