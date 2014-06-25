@@ -8,20 +8,18 @@ indent() {
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-exec `ls $1 > ./contentsOfDir.txt`
-
-# if no key is found the build will be failed
+# if no set key is found the build will be failed
 if [ -f $3/VERIFIER_KEY ]; then
   key=$(cat $3/VERIFIER_KEY)
-  echo "-----> Key is $key"
+  echo "-----> Set key to $key"
 else
-  echo "-----> Key not found. Build failed."
+  echo "-----> Set Key not found. Build failed."
   exit 1
 fi
 
-# if identifier.txt does not contain the key, abort the build
-if grep -q $key $1/identifier.txt; then
-  echo "Match. Production build authorized"
+# if SHORTLOG does not contain the key, abort the build
+if grep -q $key $1/SHORTLOG; then
+  echo "Key match found in SHORTLOG. Production build authorized"
   exit 0
 
 else
