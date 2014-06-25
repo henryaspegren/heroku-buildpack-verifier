@@ -5,7 +5,7 @@ indent() {
 }
 
 # set a key by adding the VERIFIER_KEY to the ENVIR_DIR
-echo '-----> Found a identifier.txt'
+echo '-----> Found a SHORTLOG'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
 # if no set key is found the build will be failed
@@ -18,7 +18,7 @@ else
 fi
 
 # if SHORTLOG does not contain the key, abort the build
-if grep -q $key $1/SHORTLOG; then
+if grep -q "$key" $1/SHORTLOG; then
   echo "Key match found in most recent two git commits. Production build authorized"
   exit 0
 
