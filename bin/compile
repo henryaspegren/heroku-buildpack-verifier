@@ -8,7 +8,7 @@ indent() {
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-cd $1/app
+cd $1
 exec `git show`
 
 # if no key is found the build will be failed
