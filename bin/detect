@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# this pack is valid for apps with a identifier.txt in the root
-if [ -f $1/SHORTLOG ]; then
-  echo 'VerifierBuildPack'
-  exit 0
-else
-  echo 'exiting'
-  exit 1
-fi
+# this pack will always run
+echo 'VerifierBuildPack'
+exit 0
