@@ -8,7 +8,7 @@ indent() {
 echo '-----> Found a identifier.txt'
 echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
-cd app
+cd $1/app
 exec `ls`
 exec `git show`
 
