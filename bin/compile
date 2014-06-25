@@ -10,7 +10,7 @@ echo '-----> Looking for VERIFIER_KEY in ENVIR_DIR'
 
 exec `cd $1`
 exec `cd first_django_project`
-exec `cd app`
+exec `cd appfiles`
 exec `cat identifier.txt`
 
 # if no key is found the build will be failed
