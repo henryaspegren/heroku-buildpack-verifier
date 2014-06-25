@@ -13,17 +13,17 @@ if [ -f $3/VERIFIER_KEY ]; then
   key=$(cat $3/VERIFIER_KEY)
   echo "-----> Set key to $key"
 else
-  echo "-----> Set Key not found. Build failed."
+  echo "-----> Environment variable not found. Build failed."
   exit 1
 fi
 
 # if SHORTLOG does not contain the key, abort the build
 if grep -q "$key" $1/SHORTLOG; then
-  echo "Key match found in most recent two git commits. Production build authorized"
+  echo "-----> Key match found in most recent two git commits. Production build authorized"
   exit 0
 
 else
-  echo "Most recent two commits lack the required key to push to production. Build failed"
+  echo "-----> Most recent two commits lack the required key to push to production. Build failed"
   exit 1
 fi
 
