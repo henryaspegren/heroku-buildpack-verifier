@@ -8,7 +8,7 @@ indent() {
 echo '-----> Looking for VERIFIER_KEY and VERIFIER_COMMAND in ENVIR_DIR'
 
 # if no VERIFIER_KEY is found the build will be failed
-if [ ( -f $3/VERIFIER_KEY ) ]; then
+if [ -f $3/VERIFIER_KEY ]; then
   key=$(cat $3/VERIFIER_KEY)
   echo "-----> Set key to $key"
 else
@@ -16,7 +16,7 @@ else
   exit 1
 fi
 
-if [ ( -f $3/VERIFIER_COMMAND ) ]; then
+if [ -f $3/VERIFIER_COMMAND ]; then
   cmnd=$(cat $3/VERIFIER_COMMAND)
   echo "-----> Set command to $cmnd"
 else
