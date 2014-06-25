@@ -19,11 +19,11 @@ fi
 
 # if SHORTLOG does not contain the key, abort the build
 if grep -q $key $1/SHORTLOG; then
-  echo "Key match found in SHORTLOG. Production build authorized"
+  echo "Key match found in most recent two git commits. Production build authorized"
   exit 0
 
 else
-  echo "identifier.txt does not have the required key to push to production. Build failed"
+  echo "Most recent two commits lack the required key to push to production. Build failed"
   exit 1
 fi
 
