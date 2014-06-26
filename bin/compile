@@ -29,7 +29,7 @@ fi
 echo "-----> Searching VERIFIER_COMMAND for VERIFIER_KEY to authorize deployment"
 
 # if SHORTLOG does not contain the key, abort the build
-if grep -q "$key" $1/VERIFIER_COMMAND; then
+if grep -q "$key" "$1/$cmnd"; then
   echo "       Key match found verifier command. Production build authorized"
   exit 0
 
