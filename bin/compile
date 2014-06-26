@@ -20,7 +20,7 @@ echo "entering build directory"
 
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
 
-if `echo $WONDERBREAD_COMMAND $1 $2 $3`; then
+if `$WONDERBREAD_COMMAND $1 $2 $3`; then
   # If the command evaluates to true the build proceeds
   echo "       Set command evaluated to true. Build authorized"
   exit 0
