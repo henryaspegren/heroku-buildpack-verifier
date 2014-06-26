@@ -1,40 +1,29 @@
 #!/bin/sh
 
-indent() {
-  sed -u 's/^/       /'
-}
+# set a command by adding VERIFIER_COMMAND to the ENVIR_DIR
+echo '-----> Looking for WONDERBREAD_COMMAND in ENVIR_DIR'
 
-# set a key and command by adding VERIFIER_KEY and VERIFIER_COMMAND to the ENVIR_DIR
-echo '-----> Looking for VERIFIER_KEY and VERIFIER_COMMAND in ENVIR_DIR'
-
-# if no VERIFIER_KEY is found the build will be failed
-if [ -f $3/VERIFIER_KEY ]; then
-  key=$(cat $3/VERIFIER_KEY)
-  echo "-----> Setting key to $key"
+# if no WONDERBREAD_COMMAND is found the build will be failed
+if [ -f $3/WONDERBREAD_COMMAND ]; then
+  WONDERBREAD_COMMAND=$(cat $3/WONDERBREAD_COMMAND)
+  echo "-----> Setting command to $WONDERBREAD_COMMAND"
 else
-  echo "-----> No VERIFIER_KEY found. Build failed."
+  echo "-----> No WONDERBREAD_COMMAND found. Build failed."
   exit 1
 fi
 
-# if no VERIFIER_COMMAND is found the build will be failed
-if [ -f $3/VERIFIER_COMMAND ]; then
-  cmnd=$(cat $3/VERIFIER_COMMAND)
-  echo "-----> Setting command to $cmnd"
-else
-  echo "-----> No VERIFIER_COMMAND found. Build failed."
-  exit 1
-fi
+echo "-----> Executing command to authorize deployment"
 
-
-echo "-----> Searching VERIFIER_COMMAND for VERIFIER_KEY to authorize deployment"
-
-# if SHORTLOG does not contain the key, abort the build
-if grep -q "$key" "$1/$cmnd"; then
-  echo "       Key match found in verifier command. Production build authorized"
+# WONDERBREAD_COMMAND is executed and the BUILD_DIR CACHE and ENVIR_DIR are all
+# passed in as arguments.
+if `echo $1 $2 $3 | xargs $3/WONDERBREAD_COMMAND`; then
+  # If the command evaluates to true the build proceeds
+  echo "       Set command evaluated to true. Build authorized"
   exit 0
 
 else
-  echo "       Verifier command lacks the required key to push to production. Build failed"
+  # if the command evaluates to fales the build is failed.
+  echo "       Set command evaluated to false. Build failed"
   exit 1
 fi
 
