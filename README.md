@@ -28,7 +28,7 @@ Set verifier command to check a file for a production key to authorize deploymen
 
 Specify the buildpack when pushing to heroku
 
-    $ heroku create --stack cedar --buildpack https://github.com/henryaspegren/heroku-buildpack-verifier.git
+    $ heroku create --stack cedar --buildpack https://github.com/henryaspegren/heroku-buildpack-wonderbread.git
 
     $ git push heroku master
     ...
