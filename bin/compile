@@ -14,7 +14,7 @@ fi
 
 echo "-----> Executing command to authorize deployment"
 
-echo $1 $2 $3 | xargs echo $3/WONDERBREAD_COMMAND
+echo $1 $2 $3 | xargs echo $WONDERBREAD_COMMAND
 
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
 if `echo $1 $2 $3 | xargs $WONDERBREAD_COMMAND`; then
