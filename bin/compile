@@ -17,7 +17,7 @@ echo "-----> Executing command to authorize deployment"
 # CD to BUILD_DIR
 cd $1
 echo "entering build directory"
-
+echo "$WONDERBREAD_COMMAND"
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
 
 if `$WONDERBREAD_COMMAND $1 $2 $3`; then
