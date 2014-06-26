@@ -10,10 +10,10 @@ This buildpack is designed to be used as the part of a larger [multi-stage build
 Set the command using heroku
 
     # Executes any bash command
-    heroku config:set VERIFIER_COMMAND='any_bash_command'
+    $ heroku config:set VERIFIER_COMMAND='any_bash_command'
 
     # Run a script stored in the app dirctory
-    heroku config:set VERIFIER_COMMAND='sh any_script.sh'
+    $ heroku config:set VERIFIER_COMMAND='sh any_script.sh'
 
 
 Example Uses
@@ -23,7 +23,7 @@ Preventing unintentional deployment to production:
 
 Set verifier command to check a file for a production key to authorize deployment
 
-    heroku config:set VERIFIER_COMMAND='grep -q $secretproductionkey SOMEFILE'
+    $ heroku config:set VERIFIER_COMMAND='grep -q $secretproductionkey SOMEFILE'
 
 
 Specify the buildpack when pushing to heroku
