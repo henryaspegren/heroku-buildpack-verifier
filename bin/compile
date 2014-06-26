@@ -14,9 +14,12 @@ fi
 
 echo "-----> Executing command to authorize deployment"
 
-echo $1 $2 $3 | xargs echo $WONDERBREAD_COMMAND
+# CD to BUILD_DIR
+cd $1
+echo "entering build directory"
 
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
+
 if `echo $1 $2 $3 | xargs $WONDERBREAD_COMMAND`; then
   # If the command evaluates to true the build proceeds
   echo "       Set command evaluated to true. Build authorized"
