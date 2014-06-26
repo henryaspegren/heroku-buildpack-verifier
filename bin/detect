@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # this pack will always run
-echo 'VerifierBuildPack'
+echo 'Wonderbread'
 exit 0

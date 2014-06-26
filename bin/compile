@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# set a command by adding VERIFIER_COMMAND to the ENVIR_DIR
+# set a command by adding WONDERBREAD_COMMAND to the ENVIR_DIR
 echo '-----> Looking for WONDERBREAD_COMMAND in ENVIR_DIR'
 
 # if no WONDERBREAD_COMMAND is found the build will be failed
@@ -12,21 +12,22 @@ else
   exit 1
 fi
 
-echo "-----> Executing command to authorize deployment"
+echo "-----> Executing command specified"
 
-# CD to BUILD_DIR
+
+# CD to BUILD_DIR (where appfiles are located)
 cd $1
-echo "entering build directory"
-echo "$WONDERBREAD_COMMAND"
+
+
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
 
 if `$WONDERBREAD_COMMAND $1 $2 $3`; then
-  # If the command evaluates to true the build proceeds
+  # If the command evaluates to true or exits 0 the build proceeds
   echo "       Set command evaluated to true. Build authorized"
   exit 0
 
 else
-  # if the command evaluates to fales the build is failed.
+  # if the command evaluates to false or exits !0 the build is failed.
   echo "       Set command evaluated to false. Build failed"
   exit 1
 fi

@@ -1,49 +1,49 @@
-Heroku buildpack: Verifier
+Heroku buildpack: Wonderbread
 =======================
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks).
 
 Usage:
 
-This buildpack is designed to be used as the first part of a [multi-stage buildpack](https://github.com/ddollar/heroku-buildpack-multi) to prevent unintentional deployment to production by checking a user-specified action for a specific key. The buildpack searches the environment variable VERIFIER_COMMAND (can be a file or something else) for the key set by the environment variable VERIFIER_KEY. If the VERIFIER_COMMAND lacks the key or either the key or command is not set by the environment variables the buildpack rejects the push. If the key is found the buildpack is authorized and terminates successfuly (moves on to the next buildpack specified by the multi-stage buildpack).
+This buildpack is designed to be used as the part of a larger [multi-stage buildpack](https://github.com/ddollar/heroku-buildpack-multi) to run any script or bash command the user wants. The buildpack executes the enviornment variable WONDERBREAD_COMMAND (can be an explicit BASH command or instruction to run a bash script) in the main app directory with the BUILD_DIR, CACHE and ENVIR_DIR all passed in as arguments. If running the command evaluates to false or exits nonzero the build fails. Otherwise the command runs and moves onto the next
 
-To use the git commit messages as the VERIFIER_COMMAND add following to your build script
+Set the command using heroku
 
-    #!/usr/bin/env bash
-    ...
-    echo 'Adding GITLOG'
-    git log --oneline -n 2 > GITLOG #saves the last two commit messages to the GITLOG
-    git add GITLOG
+    #Executes any bash command
+    heroku config:set VERIFIER_COMMAND='any_bash_command'
 
-And set environment variables in heroku
-
-    heroku config:set VERIFIER_COMMAND='GITLOG'
-    heroku config:set VERIFIER_KEY='$secret_production_key'
+    #Run a script stored in the app dirctory
+    heroku config:set VERIFIER_COMMAND='sh any_script.sh'
 
 
------
+Example Uses:
+-------
 
-Example usage:
+Preventing unintentional deployment to production:
+
+Set verifier command to check a file for a production key to authorize deployment
+
+    heroku config:set VERIFIER_COMMAND='grep -q $secretproductionkey SOMEFILE'
 
 
+Specify the buildpack when pushing to heroku
     $ heroku create --stack cedar --buildpack https://github.com/henryaspegren/heroku-buildpack-verifier.git
 
     $ git push heroku master
     ...
     -----> Fetching custom buildpack... done
-    -----> VerifierBuildPack app detected
-    -----> Looking for a VERIFIER_KEY and VERIFIER_COMMAND in ENVIR_DIR
-    -----> Setting key to $VERIFIER_KEY
-    -----> Setting command to $VERIFIER_COMMAND
-    -----> Searching VERIFIER_COMMAND for VERIFIER_KEZY to authorize deployment
-           Verifier command lacks the required key to push to production. Build failed
+    -----> Wonderbread app detected
+    -----> Looking for WONDERBREAD_COMMAND in ENVIR_DIR
+    -----> Setting command to grep -q $secretproductionkey SOMEFILE
+    -----> Executing command specified
+           Set command evaluated to false. Build failed
 
-    !      Push Rejected, failed to compile VerifierBuildPack app
-
+    !      Push Rejected, failed to compile Wonderbread app
 
 
-Hacking
+
+Development
 -------
 
-To use this buildpack, fork it on Github.  Push up changes to your fork, then create a test app with `--buildpack <your-github-url>` and push to it.
+To use this buildpack, fork it on Github.  Push up changes to your fork, then create a test app with `--buildpack <your-github-url>` and push to it. This buildpack is a platform for doing anything you want during a push to heroku
 
