@@ -5,7 +5,7 @@ This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks).
 
 Usage:
 
-This buildpack is designed to be used as the part of a larger [multi-stage buildpack](https://github.com/ddollar/heroku-buildpack-multi) to run any script or bash command the user wants. The buildpack executes the enviornment variable WONDERBREAD_COMMAND (can be an explicit bash command or an instruction to run a bash script) in the main app directory with the BUILD_DIR, CACHE and ENVIR_DIR all passed in as arguments. If running the command evaluates to false or exits nonzero the build fails. Otherwise the command runs and moves onto the next stage in the buildpack.
+This buildpack is designed to be used as the part of a larger [multi-stage buildpack](https://github.com/ddollar/heroku-buildpack-multi) to run any script or bash command the user wants. The buildpack executes the enviornment variable WONDERBREAD_COMMAND (can be an explicit bash command or an instruction to run a bash script) in the main app directory with the BUILD_DIR, CACHE_DIR and ENVIR_DIR all passed in as arguments. If running the command evaluates to false or exits nonzero the build fails. Otherwise the command runs and moves onto the next stage in the buildpack.
 
 Set the command using heroku
 
