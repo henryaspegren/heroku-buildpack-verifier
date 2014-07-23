@@ -1,11 +1,16 @@
 #!/bin/sh
 
+# Passed into compile script by Heroku
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
 # set a command by adding WONDERBREAD_COMMAND to the ENVIR_DIR
 echo '-----> Looking for WONDERBREAD_COMMAND in ENVIR_DIR'
 
 # if no WONDERBREAD_COMMAND is found the build will be failed
-if [ -f $3/WONDERBREAD_COMMAND ]; then
-  WONDERBREAD_COMMAND=$(cat $3/WONDERBREAD_COMMAND)
+if [ -f "$ENV_DIR/WONDERBREAD_COMMAND" ]; then
+  WONDERBREAD_COMMAND=$(cat "$ENV_DIR/WONDERBREAD_COMMAND")
   echo "-----> Setting command to $WONDERBREAD_COMMAND"
 else
   echo "-----> No WONDERBREAD_COMMAND found. Build failed."
@@ -14,13 +19,8 @@ fi
 
 echo "-----> Executing command specified"
 
-
-# CD to BUILD_DIR (where appfiles are located)
-cd $1
-
-
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
-if `$WONDERBREAD_COMMAND $1 $2 $3`; then
+if (eval WONDERBREAD_COMMAND); then
   # If the command evaluates to true or exits 0 the build proceeds
   echo "       Set command evaluated to true. Build authorized"
   exit 0
