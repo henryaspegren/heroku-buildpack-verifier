@@ -23,7 +23,7 @@ Preventing unintentional deployment to production:
 
 Set verifier command to check a file for a production key to authorize deployment
 
-    $ heroku config:set WONDERBREAD_COMMAND='grep -q $secretproductionkey SOMEFILE'
+    $ heroku config:set WONDERBREAD_COMMAND='grep -q $secretproductionkey $BUILD_DIR/some_file'
 
 
 Specify the buildpack when pushing to heroku
@@ -35,9 +35,9 @@ Specify the buildpack when pushing to heroku
     -----> Fetching custom buildpack... done
     -----> Wonderbread app detected
     -----> Looking for WONDERBREAD_COMMAND in ENVIR_DIR
-    -----> Setting command to grep -q $secretproductionkey SOMEFILE
+    -----> Setting command to grep -q $secretproductionkey $BUILD_DIR/some_file
     -----> Executing command specified
-           Set command evaluated to false. Build failed # without production key the build fails
+           Set command evaluated to false. Build failed     # without production key the build fails
 
     !      Push Rejected, failed to compile Wonderbread app
 
