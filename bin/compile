@@ -20,7 +20,7 @@ fi
 echo "-----> Executing command specified"
 
 # WONDERBREAD_COMMAND is executed and the BUILD_DIR, CACHE and ENVIR_DIR are passed in as arguments.
-if (eval WONDERBREAD_COMMAND); then
+if (eval $WONDERBREAD_COMMAND); then
   # If the command evaluates to true or exits 0 the build proceeds
   echo "       Set command evaluated to true. Build authorized"
   exit 0
